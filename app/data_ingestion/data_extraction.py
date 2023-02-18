@@ -1,29 +1,15 @@
-from abc import ABCMeta, abstractmethod
 from kaggle.api.kaggle_api_extended import KaggleApi
+from google.cloud import bigquery
 import pandas as pd
-import zipfile
+import os
+import utils
 
 DATA_DEFAULT_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/data/'
-
-
-def unzip(file_name):
-    zip_file_path = DATA_DEFAULT_LOCATION + file_name + ".zip"
-    print(f"Zip File Path: {zip_file_path}")
-
-    try:
-        with zipfile.ZipFile(zip_file_path) as z:
-            z.extractall(DATA_DEFAULT_LOCATION)
-    except zipfile.BadZipFile as e:
-        raise ValueError(
-            'Bad zip file, please report on '
-            'www.github.com/kaggle/kaggle-api', e)
-    except FileNotFoundError as e:
-        print(f"File not zipped!", e)
-        return
+GOOGLE_API_KEY_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/keys/famous-empire-377103-ce060648fd94.json'
 
 
 class ExtractKaggleData():
-    """ It simply downloads the data file from web """
+    """ It simply downloads the data file from Kaggle """
 
     def get_data(self, dataset_name, file_name, seperator=','):
         api = KaggleApi()
@@ -31,17 +17,35 @@ class ExtractKaggleData():
 
         response = api.dataset_download_file(dataset=dataset_name, file_name=file_name, path=DATA_DEFAULT_LOCATION)
         print("Kaggle API download response: ", response)
+        utils.unzip(DATA_DEFAULT_LOCATION, file_name)
 
-        unzip(file_name)
+        return pd.read_csv(DATA_DEFAULT_LOCATION + file_name, sep=seperator)
 
-        df = pd.read_csv(DATA_DEFAULT_LOCATION + file_name, sep=seperator)
-        return df
+
+class ExtractGoogleCloudData:
+    """ It simply downloads data from Google cloud public Dataset """
+
+    def get_data(self, query):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_API_KEY_LOCATION
+        client = bigquery.Client()
+        query_job = client.query(query)
+        query_result = query_job.result()
+
+        return query_result.to_dataframe()
+
+
+
+
+
+
+
 
 
 def extractor(source="Kaggle"):
     """Factory Method"""
     extractors = {
         "Kaggle": ExtractKaggleData,
+        "Google-Cloud": ExtractGoogleCloudData
     }
 
     return extractors[source]()
@@ -51,5 +55,8 @@ if __name__ == "__main__":
     dataset_name = 'johnybhiduri/us-crime-data'
     file_name = 'US_Crime_Data.csv'
 
-    df = extractor("Kaggle").get_data(dataset_name=dataset_name, file_name=file_name)
+    # Kaggle example
+    # df = extractor("Kaggle").get_data(dataset_name=dataset_name, file_name=file_name)
+    # print(df)
+    df = extractor("Google-Cloud").get_data(query="SELECT * FROM `bigquery-public-data.covid19_nyt.us_states` where date='2020-10-01'")
     print(df)
