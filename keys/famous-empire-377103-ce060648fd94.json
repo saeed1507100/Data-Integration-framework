@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "famous-empire-377103",
+  "private_key_id": "ce060648fd94a21475b4b04076bb26fbdb394c59",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCe2c/XlQQwj89n\n6YL12ObdvjdrcNCw4/CszMcPXfSVThSdICmrwObBlAntZ0rbdq40hIutMemFkAru\nH0jO3x9+/r3kaHaGPl3y23uABAPeh7kULmI3tT4LNh7pQ8DyY19UbKVXtGOuu38r\n1DJfoLMYbkuzmXkj8usbVMQh5dr/MG/t+J9Btkx60k8IGVYmnizuFpKzgXxFhb/9\nxXrsAVHLI+k8yGxPk0toL4s9MsV7sMsKIxSBIieewIBiOb/YmEGcLaK2SurE37tn\nquLJaci71oD6FuJ2hRV3g+o0toFJreTRtdEOzFSWQf25Jh5hJQ61VkrEYXZxNxfU\nCMtj/4LPAgMBAAECggEASsbIrriQtNV1sno7ckSNBRQuXW7JZoOef5GUIRk+8evE\nC2UhCJ9xYO2xsKY/mEjpX4KHh9unjH6OjqJ+cReaaXs8Y6GDLdV8/z4viEcblSz5\nxFTDWmsAjmGHMpJ46QE7VnAgc0VQ6WeMyVKF9fsdY6JEE4LrAi+vWfnQrA5aRWbH\nI6TF9oO9ZKuwim9Nt3qhw7QgzPvct0uuZwkJOCJmNf5il2YcuS+f0LAggbQI8SGa\ncTR+0PtLCoaY3Eq84/NSfXtiOUgAv8g44sVIsRwi6Hh9i/NjXBuz3IAkpXzgRqT9\nNmuECd5g8Gys8jhvEM2mYelzdsQE4L8H/gteMxd3GQKBgQDUgcpUbXjWEaoekb4t\nS8Xb4ezKtO7LCB6PppemyNR8tPsgbAmr6Qcm7uUPH7oJYTzeDD7gh5pDWKQAXV9u\nmIGtXqbXqsmN035kVZb4so6QyZQQJLzdHphhp17JTpa3DiFBSgpBzkS5aNJrMsfY\nW4m6v2T5BPme51P49ZVMquvwNwKBgQC/XLsDsxzKI6BtQMfjWyfEymB8fk7mRYcb\nEy0+5RzfTnk0YH/Z4Jrt/XnKY2Djl6/nV6TdE9BokDuZG+/vwB4X7aq1rh734eAh\nGIYkWMtYGsrYMM87nOoTiK6RhPhUlQzf2GeKYL5Zpz8gBT83L+Z5T1OrUtzaHfvb\n/Wu2qjFGKQKBgEGFr0vu4RYoJir8xwWSWnRcqbUqqoIhg8LJG/NJ8vJsnw21IhpG\nZHUlrazHHIZt2+WfIvf595+SQib2o0knbrx09b6Do1e+gTcQiNcvvvN3o9aCbVVE\nbLmXcItjVuckTS6jVJxLrDb60f5JjwLv3nydLNX3KbxMGUEm/5y/CrZrAoGARTUu\nVbozkU+tN5YUNL/E9EEVADFWK6W9pSccWADYnlJtN2onEw9OOQBRSccDRYyYi5yA\n/Yuq9gYj583Yyua6e4DzGl3syU2hl5ac/Qw4DpcyAVo1uKOZbJMkP3DNtxlo3JQR\nblRqw1XfWJ9NK5JhUkJESlPfl+r8KaXPjPKke3ECgYAZ72qWMdZGPJIX9f7G0nyo\nNAx5fVAbYE5L3H8BL6Wr26ECJSLSAZVfjGJ24J8XD75cK6I/Gw6pN2Q3bjR/qIi8\n4YDRhwiraaUXpr83QYTc4UU3wj0ALntVy8i30x2go62Au79Oowps+t1uj52DgabP\nkUhi8hhrHwZtUFw+aThpJg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "data-integration-framework@famous-empire-377103.iam.gserviceaccount.com",
+  "client_id": "114896521586897122782",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/data-integration-framework%40famous-empire-377103.iam.gserviceaccount.com"
+}
