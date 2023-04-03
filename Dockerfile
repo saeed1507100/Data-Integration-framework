@@ -1,4 +1,10 @@
 FROM apache/airflow:2.5.2
-COPY requirements.txt /requirements.txt
+COPY requirements.txt .
+COPY app app
+COPY setup.py .
+COPY .kaggle .kaggle
+
 RUN pip install --user --upgrade pip
-RUN pip install --no-cache-dir --user -r /requirements.txt
+
+# Install python dependencies
+RUN pip install --no-cache-dir --root-user-action=ignore .
