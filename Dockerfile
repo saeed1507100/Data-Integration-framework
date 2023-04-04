@@ -1,14 +1,18 @@
-FROM datamechanics/spark:3.1-latest
-
-ENV PYSPARK_MAJOR_PYTHON_VERSION=3
-
-WORKDIR /opt/application/
-
+FROM apache/airflow:2.5.2
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+COPY app app
+COPY setup.py .
+COPY keys keys
+COPY .env ./.env
+RUN mkdir data/
 
-COPY app/ app/
-COPY main.py .
-COPY ./postgresql-42.5.1.jar /opt/spark/jars
+ENV KAGGLE_USERNAME=$KAGGLE_USERNAME \
+    KAGGLE_KEY=$KAGGLE_KEY \
+    SUPABASE_DB_REFERENCE_ID=$SUPABASE_DB_REFERENCE_ID \
+    SUPABASE_DB_PASSWORD=$SUPABASE_DB_PASSWORD \
+    GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
 
-CMD ["python3", "main.py"]
+RUN pip install --user --upgrade pip
+
+# Install python dependencies
+RUN pip install --no-cache-dir --root-user-action=ignore .

@@ -2,10 +2,9 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 from google.cloud import bigquery
 import pandas as pd
 import os
-import utils
+from app.data_ingestion import utils
 
-DATA_DEFAULT_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/data/'
-GOOGLE_API_KEY_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/keys/famous-empire-377103-ce060648fd94.json'
+DATA_DEFAULT_LOCATION = './'
 
 
 class ExtractKaggleData():
@@ -25,20 +24,15 @@ class ExtractKaggleData():
 class ExtractGoogleCloudData:
     """ It simply downloads data from Google cloud public Dataset """
 
-    def get_data(self, query):
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_API_KEY_LOCATION
+    def get_data(self, query, file_name):
         client = bigquery.Client()
         query_job = client.query(query)
         query_result = query_job.result()
+        df = query_result.to_dataframe()
+        print(df)
+        df.to_csv(DATA_DEFAULT_LOCATION+file_name, index=False)
 
-        return query_result.to_dataframe()
-
-
-
-
-
-
-
+        return df
 
 
 def extractor(source="Kaggle"):
@@ -58,5 +52,6 @@ if __name__ == "__main__":
     # Kaggle example
     # df = extractor("Kaggle").get_data(dataset_name=dataset_name, file_name=file_name)
     # print(df)
-    df = extractor("Google-Cloud").get_data(query="SELECT * FROM `bigquery-public-data.covid19_nyt.us_states` where date='2020-10-01'")
+    df = extractor("Google-Cloud").get_data(
+        query="SELECT * FROM `bigquery-public-data.covid19_nyt.us_states` where date='2020-10-01'")
     print(df)
