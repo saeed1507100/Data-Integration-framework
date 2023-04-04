@@ -21,3 +21,9 @@ When we have successfully initialized the database, we can start the airflow by 
 ```commandline
 docker compose up -d
 ```
+
+### **4. Restart Docker Containers**
+When we add some new feature to the dockerfile or python packages, we can rebuild and run the docker containers by following shell script.
+```commandline
+sh rerun_airflow_docker.sh
+```
