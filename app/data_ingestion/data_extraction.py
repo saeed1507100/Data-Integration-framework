@@ -2,10 +2,9 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 from google.cloud import bigquery
 import pandas as pd
 import os
-import utils
+from app.data_ingestion import utils
 
-DATA_DEFAULT_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/data/'
-GOOGLE_API_KEY_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/keys/famous-empire-377103-ce060648fd94.json'
+DATA_DEFAULT_LOCATION = './'
 
 
 class ExtractKaggleData():
@@ -26,12 +25,12 @@ class ExtractGoogleCloudData:
     """ It simply downloads data from Google cloud public Dataset """
 
     def get_data(self, query, file_name):
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_API_KEY_LOCATION
         client = bigquery.Client()
         query_job = client.query(query)
         query_result = query_job.result()
         df = query_result.to_dataframe()
-        df.to_csv(DATA_DEFAULT_LOCATION+file_name)
+        print(df)
+        df.to_csv(DATA_DEFAULT_LOCATION+file_name, index=False)
 
         return df
 

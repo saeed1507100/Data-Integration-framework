@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlalchemy
 
-DATA_DEFAULT_LOCATION = '/Users/saeed.anwar/Projects/Data-Integration-framework/data/'
+DATA_DEFAULT_LOCATION = './'
 
 
 class LoadDataToSupabase:
@@ -20,7 +20,7 @@ class LoadDataToSupabase:
         try:
             engine = sqlalchemy.create_engine(
                 f'postgresql://postgres:{db_password}@db.{db_reference_id}.supabase.co:5432/postgres')
-            dataframe = pd.read_csv(DATA_DEFAULT_LOCATION + file_name)
+            dataframe = pd.read_csv(DATA_DEFAULT_LOCATION + file_name, index_col=False)
             dataframe.to_sql(table, con=engine, if_exists="append", index=False)
             print(f"Data loaded into table: {table}")
         except Exception as E:
