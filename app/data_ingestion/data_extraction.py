@@ -12,8 +12,10 @@ class ExtractKaggleData():
 
     def get_data(self, config):
         # Set username & key for authentication
-        os.environ['KAGGLE_USERNAME'] = config['source']['user_name']
+        os.environ['KAGGLE_USERNAME'] = config['source']['username']
         os.environ['KAGGLE_KEY'] = config['source']['key']
+
+        file_name = config['file_name']
 
         api = KaggleApi()
         api.authenticate()
@@ -26,7 +28,7 @@ class ExtractKaggleData():
         print("Kaggle API download response: ", response)
         utils.unzip(DATA_DEFAULT_LOCATION, file_name)
 
-        return pd.read_csv(DATA_DEFAULT_LOCATION + file_name, sep=seperator)
+        return pd.read_csv(DATA_DEFAULT_LOCATION + file_name)
 
 
 class ExtractGoogleCloudData:
