@@ -9,7 +9,7 @@ FILE_NAME = "covid19_us_states_20201001.csv"
 
 
 def get_config():
-    uri = "mongodb+srv://dev:xQinxvkB8D7zn7tF@configdb.krybqe8.mongodb.net/?retryWrites=true&w=majority"
+    uri = "mongodb+srv://dev:{MONGODB_PASSWORD_DEV}@configdb.krybqe8.mongodb.net/?retryWrites=true&w=majority"
     client = MongoClient(uri)
     db = client['configdb']
     config = db['integration_configuration'].find()
