@@ -10,9 +10,12 @@ DATA_DEFAULT_LOCATION = './'
 class ExtractKaggleData():
     """ It simply downloads the data file from Kaggle """
 
-    def get_data(self, dataset_name, file_name, seperator=','):
+    def get_data(self, dataset_name, file_name, user_name, key, seperator=','):
         api = KaggleApi()
         api.authenticate()
+
+        os.environ['KAGGLE_USERNAME'] = user_name
+        os.environ['KAGGLE_KEY'] = key
 
         response = api.dataset_download_file(dataset=dataset_name, file_name=file_name, path=DATA_DEFAULT_LOCATION)
         print("Kaggle API download response: ", response)
