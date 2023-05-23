@@ -10,14 +10,19 @@ DATA_DEFAULT_LOCATION = './'
 class ExtractKaggleData():
     """ It simply downloads the data file from Kaggle """
 
-    def get_data(self, dataset_name, file_name, user_name, key, seperator=','):
+    def get_data(self, config):
+        # Set username & key for authentication
+        os.environ['KAGGLE_USERNAME'] = config['source']['user_name']
+        os.environ['KAGGLE_KEY'] = config['source']['key']
+
         api = KaggleApi()
         api.authenticate()
 
-        os.environ['KAGGLE_USERNAME'] = user_name
-        os.environ['KAGGLE_KEY'] = key
-
-        response = api.dataset_download_file(dataset=dataset_name, file_name=file_name, path=DATA_DEFAULT_LOCATION)
+        response = api.dataset_download_file(
+            dataset=config['dataset_name'],
+            file_name=config['file_name'],
+            path=DATA_DEFAULT_LOCATION
+        )
         print("Kaggle API download response: ", response)
         utils.unzip(DATA_DEFAULT_LOCATION, file_name)
 
@@ -41,8 +46,8 @@ class ExtractGoogleCloudData:
 def extractor(source="Kaggle"):
     """Factory Method"""
     extractors = {
-        "Kaggle": ExtractKaggleData,
-        "Google-Cloud": ExtractGoogleCloudData
+        "kaggle": ExtractKaggleData,
+        "google_cloud": ExtractGoogleCloudData
     }
 
     return extractors[source]()
